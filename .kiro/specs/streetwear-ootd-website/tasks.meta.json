@@ -1,0 +1,253 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Base HTML skeleton, Tailwind CDN, and config block": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362991698
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363005009
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363088113
+      }
+    ],
+    "2. CSS custom properties, global resets, and animation utility classes": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993195
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363093744
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363212238
+      }
+    ],
+    "3. Page Transition overlay": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993441
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363223473
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363332401
+      }
+    ],
+    "6. Hero Banner section": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993563
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363224182
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363332781
+      }
+    ],
+    "7. JavaScript data arrays": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993649
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363094442
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363212716
+      }
+    ],
+    "10. New Arrivals section": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993787
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363343548
+      },
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363596046
+      }
+    ],
+    "11. Style Inspiration Gallery section": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993860
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363343983
+      },
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363601078
+      }
+    ],
+    "12. Brand Story section": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362993931
+      },
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783363344859
+      },
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363606227
+      }
+    ],
+    "13. Checkpoint — Ensure all sections and global styles render correctly": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362994026
+      }
+    ],
+    "16. Premium Footer": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362994098
+      }
+    ],
+    "20. Image error handling (onerror placeholder)": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362994166
+      }
+    ],
+    "23. Performance QA pass": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362994241
+      }
+    ],
+    "24. Final checkpoint — Ensure all tests pass": [
+      {
+        "executionId": "b339f0a4-7df9-419a-893f-f5acccfd4acc",
+        "chatSessionId": "sess_96798091-d237-451e-ad7f-118306c9c7ab",
+        "timestamp": 1783362994324
+      }
+    ],
+    "4. Mouse-Follow Glow element and MouseGlow JS module": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363575872
+      }
+    ],
+    "5. Glassmorphism Navbar": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363580227
+      }
+    ],
+    "8. Featured Collection section": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363585393
+      }
+    ],
+    "9. Trending OOTD section": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363590988
+      }
+    ],
+    "14. Customer Reviews section and CarouselController": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363610751
+      }
+    ],
+    "15. Newsletter section and NewsletterForm module": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363616006
+      }
+    ],
+    "17. ScrollAnimationObserver JS module": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363620964
+      }
+    ],
+    "18. ParallaxEngine JS module": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363625582
+      }
+    ],
+    "19. MagneticButton JS module": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363630890
+      }
+    ],
+    "21. Accessibility wiring": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363635836
+      }
+    ],
+    "22. Responsive QA pass": [
+      {
+        "executionId": "e1646a7e-cca9-4dd0-972f-45d72ff25779",
+        "chatSessionId": "sess_9cca5b08-2a32-4183-a25a-d7229ac3f952",
+        "timestamp": 1783363641765
+      }
+    ]
+  }
+}

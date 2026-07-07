@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STREETWEAR OOTD — Premium Editorial</title>
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind custom config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-base':      '#0a0a0a',
+            'bg-surface':   '#1a1a1a',
+            'off-white':    '#f5f5f0',
+            'accent-blue':  '#3b82f6',
+            'accent-purple':'#8b5cf6',
+          },
+          fontFamily: {
+            display: ['Inter', 'Helvetica Neue', 'sans-serif'],
+          },
+          animation: {
+            'gradient-shift':  'gradientShift 8s ease infinite',
+            'fade-in-overlay': 'fadeInOverlay 1.2s ease forwards',
+            'pulse-bounce':    'pulseBounce 2s ease-in-out infinite',
+            'badge-new-drop':  'badgePulse 1.5s ease-in-out infinite',
+          },
+          keyframes: {
+            gradientShift: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%':      { backgroundPosition: '100% 50%' },
+            },
+            fadeInOverlay: {
+              '0%':   { opacity: '1' },
+              '100%': { opacity: '0', pointerEvents: 'none' },
+            },
+            pulseBounce: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%':      { transform: 'translateY(8px)' },
+            },
+            badgePulse: {
+              '0%, 100%': { opacity: '1',   transform: 'scale(1)' },
+              '50%':      { opacity: '0.7', transform: 'scale(1.05)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <style>
+    /* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+    :root {
+      --color-bg:           #0a0a0a;
+      --color-surface:      #1a1a1a;
+      --color-text:         #f5f5f0;
+      --color-text-muted:   #9ca3af;
+      --color-accent-blue:  #3b82f6;
+      --color-accent-purple:#8b5cf6;
+
+      --section-padding: clamp(4rem, 8vw, 8rem);
+
+      --font-display: 'Inter', 'Helvetica Neue', sans-serif;
+      --font-size-hero: clamp(4rem, 10vw, 9rem);
+      --font-size-section: clamp(2.5rem, 6vw, 5rem);
+
+      --anim-duration-reveal: 700ms;
+      --anim-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --anim-stagger-base: 120ms;
+      --transition-glow: 100ms linear;
+      --transition-magnetic-leave: 350ms ease-out;
+    }
+
+    /* ─── Global smooth scroll ───────────────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    /* ─── Body reset ─────────────────────────────────────────────────────────── */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-display);
+    }
+
+    /* ─── Glassmorphism utility class ────────────────────────────────────────── */
+    .glass {
+      background: rgba(10, 10, 10, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* ─── Scroll-triggered animation states ──────────────────────────────────── */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 700ms ease-out, transform 700ms ease-out;
+    }
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Reduced-motion overrides ───────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      [data-animate] {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+      .scroll-indicator { animation: none; }
+      #page-transition  { animation: none; display: none; }
+    }
+
+    /* ─── Focus-visible outlines for keyboard navigation ─────────────────────── */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--color-accent-blue);
+      outline-offset: 2px;
+    }
+
+    /* ─── Hero Banner ──────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(59, 130, 246, 0.04) 0%,
+        rgba(139, 92, 246, 0.04) 50%,
+        rgba(59, 130, 246, 0.04) 100%
+      );
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
+      will-change: transform;
+      z-index: 0;
+    }
+
+    #hero-fg {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--section-padding) 1.5rem;
+      gap: 1.5rem;
+    }
+
+    #hero-heading {
+      font-size: var(--font-size-hero);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: var(--color-text);
+      text-transform: uppercase;
+    }
+
+    #hero-fg p {
+      font-size: clamp(0.875rem, 2vw, 1.125rem);
+      color: var(--color-text-muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 2.5rem;
+      border: 1px solid var(--color-text);
+      color: var(--color-text);
+      background: transparent;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 250ms ease, color 250ms ease;
+    }
+
+    .cta-primary:hover {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+    }
+
+    .scroll-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      animation: pulseBounce 2s ease-in-out infinite;
+      margin-top: 1rem;
+    }
+
+    /* ─── New Arrivals ─────────────────────────────────────────────────────────── */
+    #new-arrivals {
+      padding: var(--section-padding) 1.5rem;
+      background-color: var(--color-surface);
+    }
+
+    #new-arrivals h2 {
+      font-size: var(--font-size-section);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      text-transform: uppercase;
+      color: var(--color-text);
+    }
+
+    #arrivals-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    #arrivals-grid .arrivals-card:first-child {
+      grid-row: span 2;
+    }
+
+    #arrivals-grid .arrivals-card {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-bg);
+      cursor: pointer;
+    }
+
+    #arrivals-grid .arrivals-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 350ms ease;
+      display: block;
+      min-height: 280px;
+    }
+
+    #arrivals-grid .arrivals-card:hover img {
+      transform: scale(1.06);
+    }
+
+    #arrivals-grid .arrivals-card:first-child img {
+      min-height: 560px;
+    }
+
+    .arrivals-card-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+    }
+
+    .arrivals-card-info h3 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .arrivals-card-info p {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .new-drop-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      border: 1px solid currentColor;
+      animation: badgePulse 1.5s ease-in-out infinite;
+      z-index: 2;
+      background: rgba(10,10,10,0.5);
+    }
+
+    .section-cta-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    @media (max-width: 767px) {
+      #arrivals-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      #arrivals-grid .arrivals-card:first-child {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+      #arrivals-grid .arrivals-card:first-child img {
+        min-height: 320px;
+      }
+    }
+
+    /* ─── Page transition overlay ────────────────────────────────────────────── */
+    #page-transition {
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 100;
+      animation: fadeInOverlay 1.2s ease forwards;
+    }
+
+    /* ─── Style Inspiration Gallery ────────────────────────────────────────────── */
+    #gallery {
+      padding: var(--section-padding) 1.5rem;
+      background-color: var(--color-bg);
+    }
+
+    #gallery h2 {
+      font-size: var(--font-size-section);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      line-height: 0.95;
+    }
+
+    .eyebrow-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    #gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 300px;
+      gap: 0.75rem;
+    }
+
+    #gallery-mosaic figure {
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      background-color: var(--color-surface);
+      cursor: pointer;
+    }
+
+    #gallery-mosaic figure.span-tall {
+      grid-row: span 2;
+    }
+
+    #gallery-mosaic figure.span-wide {
+      grid-column: span 2;
+    }
+
+    #gallery-mosaic figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 350ms ease;
+    }
+
+    #gallery-mosaic figure:hover img {
+      transform: scale(1.06);
+    }
+
+    #gallery-mosaic figure figcaption {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem 1.25rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--color-text);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 350ms ease;
+    }
+
+    #gallery-mosaic figure:hover figcaption {
+      opacity: 1;
+    }
+
+    @media (max-width: 639px) {
+      #gallery-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 240px;
+      }
+      #gallery-mosaic figure.span-tall,
+      #gallery-mosaic figure.span-wide {
+        grid-row: span 1;
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page transition overlay -->
+  <div id="page-transition" aria-hidden="true"></div>
+
+  <!-- Mouse-follow glow element -->
+  <div id="glow-cursor" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header id="navbar"></header>
+
+  <!-- Main content -->
+  <main>
+    <section id="hero" aria-labelledby="hero-heading">
+      <!-- Background layer: animated gradient, parallax target -->
+      <div id="hero-bg" aria-hidden="true"></div>
+
+      <!-- Foreground layer: content -->
+      <div id="hero-fg">
+        <h1 id="hero-heading" data-animate>
+          WEAR THE<br>MOMENT.
+        </h1>
+        <p data-animate>
+          Editorial streetwear for those who move with intention.<br>
+          SS25 — Drop 001.
+        </p>
+        <button data-magnetic data-animate class="cta-primary" type="button">
+          Explore the Drop
+        </button>
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+    </section>
+    <section id="featured"></section>
+    <section id="trending"></section>
+    <section id="new-arrivals" aria-labelledby="arrivals-heading">
+      <div class="section-inner">
+        <h2 id="arrivals-heading" data-animate>NEW DROP</h2>
+        <div id="arrivals-grid" data-stagger-parent></div>
+        <div class="section-cta-row" data-animate>
+          <button data-magnetic class="cta-primary" type="button">
+            Explore Drop
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="gallery" aria-labelledby="gallery-heading">
+      <div class="section-inner">
+        <div data-animate>
+          <p class="eyebrow-text">EDITORIAL / LOOKBOOK 2025</p>
+          <h2 id="gallery-heading">STYLE<br>INSPIRATION</h2>
+        </div>
+        <div id="gallery-mosaic" data-stagger-parent></div>
+      </div>
+    </section>
+    <section id="story" aria-labelledby="story-heading">
+      <div id="story-overlay" aria-hidden="true"></div>
+      <div class="section-inner story-content">
+        <h2 id="story-heading" data-animate>
+          BORN IN<br>THE STREETS.
+        </h2>
+        <p data-animate>
+          We didn't start in a boardroom. We started on corners, in skate parks, and in the back of trains — drawing on secondhand notebooks, photographing friends, and obsessing over the details that mass fashion always misses.
+        </p>
+        <p data-animate>
+          Every piece is designed to be worn, not preserved. The garments are built for those who live in them — who layer, distress, archive, and eventually pass them on.
+        </p>
+        <p data-animate>
+          This is not about trends. This is about permanence.
+        </p>
+        <blockquote data-animate>
+          <span class="quote-glyph" aria-hidden="true">"</span>
+          <cite>Craft is the only luxury that compounds.</cite>
+        </blockquote>
+      </div>
+    </section>
+    <section id="reviews"></section>
+    <section id="newsletter"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <!-- Embedded JS modules -->
+  <script>
+    // =========================================================================
+    // DATA ARRAYS
+    // Declared before all render functions and module IIFEs
+    // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // FEATURED_PRODUCTS — min 4 items, asymmetric grid (first item: size 'large')
+    // -------------------------------------------------------------------------
+    const FEATURED_PRODUCTS = [
+      {
+        id: 'bomber-01',
+        name: 'ARCHIVE BOMBER',
+        category: 'SS25 / OUTERWEAR',
+        price: '$320',
+        imageSrc: 'https://images.unsplash.com/photo-1539109136236-3a8a52b62628?w=800&q=75',
+        imageAlt: 'Archive bomber jacket in washed black with contrast stitching',
+        isNew: false,
+        size: 'large',
+      },
+      {
+        id: 'cargo-01',
+        name: 'UTILITY CARGO PANT',
+        category: 'SS25 / BOTTOMS',
+        price: '$180',
+        imageSrc: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=75',
+        imageAlt: 'Relaxed utility cargo pants in charcoal grey with side pockets',
+        isNew: true,
+        size: 'medium',
+      },
+      {
+        id: 'hoodie-01',
+        name: 'OVERSIZED VOID HOODIE',
+        category: 'SS25 / TOPS',
+        price: '$145',
+        imageSrc: 'https://images.unsplash.com/photo-1551232864-3f0a3a84dc7f?w=800&q=75',
+        imageAlt: 'Oversized drop-shoulder hoodie in off-black with tonal embroidery',
+        isNew: true,
+        size: 'small',
+      },
+      {
+        id: 'tee-01',
+        name: 'EDITORIAL GRAPHIC TEE',
+        category: 'SS25 / TOPS',
+        price: '$90',
+        imageSrc: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=75',
+        imageAlt: 'Boxy graphic tee with oversized editorial print in faded ink',
+        isNew: false,
+        size: 'small',
+      },
+    ];
+
+    // -------------------------------------------------------------------------
+    // NEW_ARRIVALS — min 4 items, at least one isNew: true
+    // -------------------------------------------------------------------------
+    const NEW_ARRIVALS = [
+      {
+        id: 'track-01',
+        name: 'CONTRAST TRACK JACKET',
+        category: 'SS25 / OUTERWEAR',
+        price: '$210',
+        imageSrc: 'https://images.unsplash.com/photo-1529139574466-a303027330d1?w=800&q=75',
+        imageAlt: 'Slim track jacket with contrast side panels and zip pockets',
+        isNew: true,
+        size: 'large',
+      },
+      {
+        id: 'denim-01',
+        name: 'RAW EDGE DENIM',
+        category: 'SS25 / BOTTOMS',
+        price: '$195',
+        imageSrc: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=75',
+        imageAlt: 'Straight-fit raw edge denim jeans in indigo wash',
+        isNew: true,
+        size: 'medium',
+      },
+      {
+        id: 'vest-01',
+        name: 'TACTICAL PUFFER VEST',
+        category: 'SS25 / OUTERWEAR',
+        price: '$160',
+        imageSrc: 'https://images.unsplash.com/photo-1485462537746-965f33f9f2fc?w=800&q=75',
+        imageAlt: 'Cropped tactical puffer vest in matte black with utility pockets',
+        isNew: true,
+        size: 'medium',
+      },
+      {
+        id: 'longsleeve-01',
+        name: 'LAYERING LONG SLEEVE',
+        category: 'SS25 / TOPS',
+        price: '$110',
+        imageSrc: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=75',
+        imageAlt: 'Fitted ribbed long-sleeve base layer in soft off-white',
+        isNew: false,
+        size: 'small',
+      },
+    ];
+
+    // -------------------------------------------------------------------------
+    // OOTD_CARDS — min 3 items
+    // -------------------------------------------------------------------------
+    const OOTD_CARDS = [
+      {
+        id: 'ootd-01',
+        title: 'MONOCHROME VOID',
+        descriptor: 'All-black utility layering with oversized silhouettes',
+        imageSrc: 'https://images.unsplash.com/photo-1539109136236-3a8a52b62628?w=800&q=75',
+        imageAlt: 'Model in a full all-black layered streetwear look on urban background',
+        shopLabel: 'Shop the Look',
+      },
+      {
+        id: 'ootd-02',
+        title: 'GREY FREQUENCY',
+        descriptor: 'Tonal grey from head to toe — cargo, hoodie, sneaker stack',
+        imageSrc: 'https://images.unsplash.com/photo-1529139574466-a303027330d1?w=800&q=75',
+        imageAlt: 'Model wearing tonal grey streetwear outfit in a concrete setting',
+        shopLabel: 'Shop the Look',
+      },
+      {
+        id: 'ootd-03',
+        title: 'CONTRAST ARCHIVE',
+        descriptor: 'Bold contrast pairing — washed black top, raw denim, track jacket',
+        imageSrc: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=75',
+        imageAlt: 'Editorial outfit featuring contrast black and denim streetwear pieces',
+        shopLabel: 'Shop the Look',
+      },
+      {
+        id: 'ootd-04',
+        title: 'EDITORIAL MINIMAL',
+        descriptor: 'Clean lines, neutral base, statement outerwear',
+        imageSrc: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=75',
+        imageAlt: 'Minimalist editorial streetwear look with neutral tones and clean silhouette',
+        shopLabel: 'Shop the Look',
+      },
+    ];
+
+    // -------------------------------------------------------------------------
+    // GALLERY_IMAGES — min 6 items, mixed span types ('tall', 'wide', 'square')
+    // -------------------------------------------------------------------------
+    const GALLERY_IMAGES = [
+      {
+        id: 'gal-01',
+        imageSrc: 'https://images.unsplash.com/photo-1539109136236-3a8a52b62628?w=800&q=75',
+        imageAlt: 'Editorial close-up of layered streetwear look with bomber and cargo pants',
+        caption: 'Bomber + cargo stack',
+        span: 'tall',
+      },
+      {
+        id: 'gal-02',
+        imageSrc: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=75',
+        imageAlt: 'Wide-angle street photography of model in oversized tee and wide-leg pants',
+        caption: 'Graphic tee + wide leg',
+        span: 'wide',
+      },
+      {
+        id: 'gal-03',
+        imageSrc: 'https://images.unsplash.com/photo-1551232864-3f0a3a84dc7f?w=800&q=75',
+        imageAlt: 'Square crop of model in oversized hoodie against dark concrete wall',
+        caption: 'Void hoodie editorial',
+        span: 'square',
+      },
+      {
+        id: 'gal-04',
+        imageSrc: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=75',
+        imageAlt: 'Tall editorial portrait of model in monochrome urban streetwear look',
+        caption: 'Monochrome portrait',
+        span: 'tall',
+      },
+      {
+        id: 'gal-05',
+        imageSrc: 'https://images.unsplash.com/photo-1529139574466-a303027330d1?w=800&q=75',
+        imageAlt: 'Wide street-level shot of model in track jacket and cargo pants',
+        caption: 'Track + cargo combo',
+        span: 'wide',
+      },
+      {
+        id: 'gal-06',
+        imageSrc: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=75',
+        imageAlt: 'Square crop detail shot of raw denim and layered outerwear textures',
+        caption: 'Denim texture detail',
+        span: 'square',
+      },
+      {
+        id: 'gal-07',
+        imageSrc: 'https://images.unsplash.com/photo-1485462537746-965f33f9f2fc?w=800&q=75',
+        imageAlt: 'Tall portrait of model in puffer vest and base layer against urban backdrop',
+        caption: 'Puffer vest layer',
+        span: 'tall',
+      },
+    ];
+
+    // -------------------------------------------------------------------------
+    // REVIEWS — min 3 items
+    // -------------------------------------------------------------------------
+    const REVIEWS = [
+      {
+        id: 'rev-01',
+        name: 'Jordan M.',
+        rating: 5,
+        text: 'Quality is insane. The Archive Bomber fits exactly like the editorial — structure, weight, everything. Worth every dollar.',
+        location: 'NYC',
+      },
+      {
+        id: 'rev-02',
+        name: 'Kai T.',
+        rating: 5,
+        text: 'Got the Utility Cargo Pant and honestly I wear it three days a week. The silhouette is perfect and the fabric feels premium.',
+        location: 'London',
+      },
+      {
+        id: 'rev-03',
+        name: 'Mia S.',
+        rating: 4,
+        text: 'Void Hoodie is the real deal. Oversized but not sloppy — it drapes perfectly. Sizing up was the right call.',
+        location: 'Seoul',
+      },
+      {
+        id: 'rev-04',
+        name: 'Dante R.',
+        rating: 5,
+        text: 'The Track Jacket dropped and I copped it same day. Contrast panels are subtle but they hit different in person.',
+        location: 'Los Angeles',
+      },
+      {
+        id: 'rev-05',
+        name: 'Yuna K.',
+        rating: 5,
+        text: 'Everything about this brand is dialed in — packaging, quality, fit. The raw edge denim is my favourite piece right now.',
+        location: 'Tokyo',
+      },
+    ];
+
+    // -------------------------------------------------------------------------
+    // AGGREGATE_RATING
+    // -------------------------------------------------------------------------
+    const AGGREGATE_RATING = {
+      score: 4.9,
+      count: 128,
+    };
+
+    // ── PageTransition ────────────────────────────────────────────────────────
+    const PageTransition = (function () {
+      function init() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const el = document.getElementById('page-transition');
+        if (!el) return;
+
+        if (prefersReducedMotion) {
+          // Immediately hide without animation
+          el.style.display = 'none';
+          return;
+        }
+
+        el.addEventListener('animationend', function () {
+          el.style.display = 'none';
+        });
+      }
+
+      return { init };
+    })();
+
+    PageTransition.init();
+
+    // ── renderNewArrivals ─────────────────────────────────────────────────────
+    function renderNewArrivals() {
+      const grid = document.getElementById('arrivals-grid');
+      if (!grid) return;
+
+      NEW_ARRIVALS.forEach(function (product) {
+        const article = document.createElement('article');
+        article.className = 'arrivals-card';
+        article.setAttribute('data-animate', '');
+
+        const img = document.createElement('img');
+        img.src = product.imageSrc;
+        img.alt = product.imageAlt;
+        img.loading = 'lazy';
+        img.width = 800;
+        img.height = 600;
+        img.onerror = function () {
+          this.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%231a1a1a'/></svg>";
+        };
+
+        const info = document.createElement('div');
+        info.className = 'arrivals-card-info';
+
+        const name = document.createElement('h3');
+        name.textContent = product.name;
+
+        const meta = document.createElement('p');
+        meta.textContent = product.category + ' — ' + product.price;
+
+        info.appendChild(name);
+        info.appendChild(meta);
+
+        article.appendChild(img);
+        article.appendChild(info);
+
+        if (product.isNew) {
+          const badge = document.createElement('div');
+          badge.className = 'new-drop-badge';
+          badge.textContent = 'NEW DROP';
+          article.appendChild(badge);
+        }
+
+        grid.appendChild(article);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderNewArrivals();
+    });
+
+    // =========================================================================
+    // JS modules (NavbarController, ParallaxEngine, MagneticButton,
+    // MouseGlow, ScrollAnimationObserver, CarouselController, NewsletterForm)
+    // will be implemented here (Tasks 4–19)
+    // =========================================================================
+  </script>
+
+</body>
+</html>
